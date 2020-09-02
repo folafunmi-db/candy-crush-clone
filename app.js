@@ -85,18 +85,31 @@ document.addEventListener("DOMContentLoaded", () => {
 			squareIdBeingDragged - width,
 			squareIdBeingDragged + 1,
 			squareIdBeingDragged + width,
-    ];
-    
-    // Setting a boolean for validity of the move
-    let validMove = validMoves.includes(squareIdBeingReplaced);
-    if (squareIdBeingReplaced && validMove) {
-      squareIdBeingReplaced = null;
-    } else if (squareIdBeingReplaced && !validMove) {
-      squares[squareIdBeingReplaced].style.backgroundColor = colourBeingReplaced;
-      squares[squareIdBeingDragged].style.backgroundColor = colourBeingDragged;
-    } else {
-      squares[squareIdBeingDragged].style.backgroundColor = colourBeingDragged;
+		];
 
+		// Setting a boolean for validity of the move
+		let validMove = validMoves.includes(squareIdBeingReplaced);
+		if (squareIdBeingReplaced && validMove) {
+			squareIdBeingReplaced = null;
+		} else if (squareIdBeingReplaced && !validMove) {
+			squares[
+				squareIdBeingReplaced
+			].style.backgroundColor = colourBeingReplaced;
+			squares[squareIdBeingDragged].style.backgroundColor = colourBeingDragged;
+		} else {
+			squares[squareIdBeingDragged].style.backgroundColor = colourBeingDragged;
     }
-	}
+  }
+  
+  function checkRowForThree() {
+    for (let i = 0; i < 61; i++) {
+      // Variable for a correct set of 3 squares
+      let rowOfThree = [i, i+1, i+2];
+      let decidedColour = square[i].style.backgroundColor;
+
+      // To check for blank squares
+      const isBlank = squares[i].style.backgroundColor === '';
+      
+    }
+  }
 });

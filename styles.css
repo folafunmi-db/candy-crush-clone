@@ -4,6 +4,9 @@
   display: flex;
   flex-wrap: wrap;
   background-color: grey;
+  position: relative;
+  margin: auto;
+  margin-top: 10rem;
 }
 
 .grid div {
