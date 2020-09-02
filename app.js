@@ -63,15 +63,22 @@ document.addEventListener("DOMContentLoaded", () => {
 	function dragLeave() {
 		console.log(this.id, "dragleave");
 	}
-
-	function dragEnd() {
-		console.log(this.id, "dragend");
-	}
-
+  
 	function dragDrop() {
-		console.log(this.id, "dragdrop");
+    console.log(this.id, "dragdrop");
     colourBeingReplaced = this.style.backgroundColor;
+
+    // Obtaining the ID of the chosen square
     squareIdBeingReplaced = parseInt(this.id);
+
+    // Changing the colour of the chosen and replaced square using ID's
     squares[squareIdBeingDragged].style.backgroundColor = colourBeingReplaced;
+    squares[squareIdBeingReplaced].style.backgroundColor = colourBeingDragged;
 	}
+  
+  function dragEnd() {
+    console.log(this.id, "dragend");
+
+    // What constitues a valid move?
+  }
 });
