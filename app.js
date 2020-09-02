@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			squareIdBeingDragged + width,
     ];
     
+    // Setting a boolean for validity of the move
     let validMove = validMoves.includes(squareIdBeingReplaced);
     if (squareIdBeingReplaced && validMove) {
       squareIdBeingReplaced = null;
