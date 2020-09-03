@@ -101,9 +101,92 @@ document.addEventListener("DOMContentLoaded", () => {
 			squares[squareIdBeingDragged].style.backgroundColor = colourBeingDragged;
 		}
 	}
+	// Check for matches of 4
+	function checkRowForFour() {
+		// Loop through each square
+		for (let i = 0; i < 61; i++) {
+			//Variable for a correct set of 4 squares
+			let rowOfFour = [i, i + 1, i + 2, i + 3];
+			let decidedColour = squares[i].style.backgroundColor;
+
+			// To check if the square is blank
+			const isBlank = squares[i].style.backgroundColor === "";
+
+			// To cater for the wrapping of matches from one row to another
+			// Set the square for which match checking is to be skipped-
+			const notValid = [
+				5,
+				6,
+				7,
+				13,
+				14,
+				15,
+				21,
+				22,
+				23,
+				29,
+				30,
+				31,
+				37,
+				38,
+				39,
+				45,
+				46,
+				47,
+				53,
+				54,
+				55,
+			];
+			if (notValid.includes(i)) continue;
+
+			// Logic for correct set of 4
+			if (
+				rowOfFour.every(
+					(index) =>
+						squares[index].style.backgroundColor === decidedColour && !isBlank
+				)
+			) {
+				score += 4;
+				rowOfFour.forEach((index) => {
+					squares[index].style.backgroundColor = "";
+				});
+			}
+		}
+	}
+
+	checkRowForFour();
+
+	// Check for matches of 4
+	function checkColumnForFour() {
+		// Loop through each square
+		for (let i = 0; i < 47; i++) {
+			//Variable for a correct set of 4 squares
+			let columnOfFour = [i, i + width, i + width * 2, i + width * 3];
+			let decidedColour = squares[i].style.backgroundColor;
+
+			// To check if the square is blank
+			const isBlank = squares[i].style.backgroundColor === "";
+
+			// Logic for correct set of 4
+			if (
+				columnOfFour.every(
+					(index) =>
+						squares[index].style.backgroundColor === decidedColour && !isBlank
+				)
+			) {
+				score += 4;
+				columnOfFour.forEach((index) => {
+					squares[index].style.backgroundColor = "";
+				});
+			}
+		}
+	}
+
+	checkColumnForFour();
 
 	// To check for row of 3 matches
 	function checkRowForThree() {
+		// Loop through each square
 		for (let i = 0; i < 61; i++) {
 			// Variable for a correct set of 3 squares
 			let rowOfThree = [i, i + 1, i + 2];
@@ -113,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			const isBlank = squares[i].style.backgroundColor === "";
 
 			// To cater for the wrapping of matches from one row to another
+			// Set the square for which match checking is to be skipped-
 			const notValid = [6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55];
 			if (notValid.includes(i)) continue;
 
@@ -130,10 +214,12 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		}
 	}
+
 	checkRowForThree();
 
 	// To check for column  of 3 matches
 	function checkColumnForThree() {
+		// Loop through each square
 		for (let i = 0; i < 47; i++) {
 			// Variable for a correct set of 3 squares
 			let columnOfThree = [i, i + width, i + width * 2];
@@ -156,6 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		}
 	}
+
 	checkColumnForThree();
 
 	window.setInterval(function () {
