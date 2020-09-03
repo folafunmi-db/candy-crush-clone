@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const grid = document.querySelector(".grid");
 	const width = 8;
 	const squares = [];
+	let score = 0;
 
 	//storing the candy colours
 	const candyColours = ["red", "yellow", "orange", "purple", "green", "blue"];
@@ -98,18 +99,32 @@ document.addEventListener("DOMContentLoaded", () => {
 			squares[squareIdBeingDragged].style.backgroundColor = colourBeingDragged;
 		} else {
 			squares[squareIdBeingDragged].style.backgroundColor = colourBeingDragged;
-    }
-  }
-  
-  function checkRowForThree() {
-    for (let i = 0; i < 61; i++) {
-      // Variable for a correct set of 3 squares
-      let rowOfThree = [i, i+1, i+2];
-      let decidedColour = square[i].style.backgroundColor;
+		}
+	}
 
-      // To check for blank squares
-      const isBlank = squares[i].style.backgroundColor === '';
-      
-    }
-  }
+	function checkRowForThree() {
+		for (let i = 0; i < 61; i++) {
+			// Variable for a correct set of 3 squares
+			let rowOfThree = [i, i + 1, i + 2];
+			let decidedColour = square[i].style.backgroundColor;
+
+			// To check for blank squares
+			const isBlank = squares[i].style.backgroundColor === "";
+
+			// Logic for correct set
+			if (
+				rowOfThree.every(
+					(index) =>
+						squares[index].style.backgroundColor === decidedColour && !isBlank
+				)
+			) {
+				score += 3;
+				rowOfThree.forEach((index) => {
+					squares[index].style.backgroundColor = "";
+				});
+			}
+		}
+	}
+
+	checkRowForThree();
 });
