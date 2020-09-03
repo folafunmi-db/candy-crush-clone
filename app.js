@@ -112,6 +112,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			// To check for blank squares
 			const isBlank = squares[i].style.backgroundColor === "";
 
+			// To cater for the wrapping of matches from one row to another
+			const notValid = [6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55];
+			if (notValid.includes(i)) continue;
+
 			// Logic for correct set
 			if (
 				rowOfThree.every(
