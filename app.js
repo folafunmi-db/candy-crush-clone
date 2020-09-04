@@ -101,6 +101,21 @@ document.addEventListener("DOMContentLoaded", () => {
 			squares[squareIdBeingDragged].style.backgroundColor = colourBeingDragged;
 		}
 	}
+
+	// Drop squares once some have been colourBeingDragged
+	function moveDown() {
+		// check the first seven rows for an empty square
+		for (i = 0; i < 55; i++) {
+			if (square[i + width].style.backgroundColor === "") {
+				square[i + width].style.backgroundColor =
+					square[i].style.backgroundColor;
+					square[i].style.backgroundColor = '';
+			}
+		}
+	}
+
+	// Check for matches
+
 	// Check for matches of 4
 	function checkRowForFour() {
 		// Loop through each square
@@ -246,6 +261,9 @@ document.addEventListener("DOMContentLoaded", () => {
 	checkColumnForThree();
 
 	window.setInterval(function () {
+		moveDown();
+		checkRowForFour();
+		checkColumnForFour();
 		checkRowForThree();
 		checkColumnForThree();
 	}, 100);
