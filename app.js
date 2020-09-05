@@ -106,10 +106,19 @@ document.addEventListener("DOMContentLoaded", () => {
 	function moveDown() {
 		// check the first seven rows for an empty square
 		for (i = 0; i < 55; i++) {
-			if (square[i + width].style.backgroundColor === "") {
-				square[i + width].style.backgroundColor =
-					square[i].style.backgroundColor;
-					square[i].style.backgroundColor = '';
+			if (squares[i + width].style.backgroundColor === "") {
+				squares[i + width].style.backgroundColor =
+					squares[i].style.backgroundColor;
+				
+				squares[i].style.backgroundColor = '';
+
+				// To include new squares in the first row
+				const firstRow = [0, 1, 2,3, 4,5 ,6, 7];
+				const isInFirstRow = firstRow.includes(i);
+				if(isInFirstRow && squares[i].style.backgroundColor === '') {
+					let randomColour = Math.floor(Math.random() * candyColours.length);
+					squares[i].style.backgroundColor = candyColours[randomColour];
+				}
 			}
 		}
 	}
