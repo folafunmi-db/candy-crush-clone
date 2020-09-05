@@ -13,3 +13,9 @@
   height: 70px;
   width: 70px;
 }
+
+.score-board {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
