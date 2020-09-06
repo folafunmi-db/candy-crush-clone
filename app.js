@@ -9,12 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	//storing the candy colours
 	const candyColours = [
-		"url(images/red.png)",
-		"url(images/yellow.png)",
-		"url(images/orange.png)",
-		"url(images/purple.png)",
-		"url(images/green.png)",
-		"url(images/blue.png)"
+		"url(https://res.cloudinary.com/folafunmi/image/upload/v1599351357/Candy%20Crush%20Candies/red_lpha7h.png)",
+		"url(https://res.cloudinary.com/folafunmi/image/upload/v1599351356/Candy%20Crush%20Candies/yellow_z6ohdt.png)",
+		"url(https://res.cloudinary.com/folafunmi/image/upload/v1599351356/Candy%20Crush%20Candies/orange_qzwnvh.png)",
+		"url(https://res.cloudinary.com/folafunmi/image/upload/v1599351356/Candy%20Crush%20Candies/purple_h7c3ak.png)",
+		"url(https://res.cloudinary.com/folafunmi/image/upload/v1599351356/Candy%20Crush%20Candies/green_yw6bll.png)",
+		"url(https://res.cloudinary.com/folafunmi/image/upload/v1599351355/Candy%20Crush%20Candies/blue_bvwm7s.png)",
 	];
 
 	// Creating Board
