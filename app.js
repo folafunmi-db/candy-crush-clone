@@ -2,13 +2,20 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 	const grid = document.querySelector(".grid");
-	const scoreDisplay = document.getElementById('score');
+	const scoreDisplay = document.getElementById("score");
 	const width = 8;
 	const squares = [];
 	let score = 0;
 
 	//storing the candy colours
-	const candyColours = ["red", "yellow", "orange", "purple", "green", "blue"];
+	const candyColours = [
+		"url(images/red.png)",
+		"url(images/yellow.png)",
+		"url(images/orange.png)",
+		"url(images/purple.png)",
+		"url(images/green.png)",
+		"url(images/blue.png)"
+	];
 
 	// Creating Board
 	function createBoard() {
@@ -23,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			let randomColour = Math.floor(Math.random() * candyColours.length);
 
 			// Get the random colour number to get the random candy colour
-			square.style.backgroundColor = candyColours[randomColour];
+			square.style.backgroundImage = candyColours[randomColour];
 
 			grid.appendChild(square);
 			squares.push(square);
@@ -46,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	let squareIdBeingReplaced;
 
 	function dragStart() {
-		colourBeingDragged = this.style.backgroundColor;
+		colourBeingDragged = this.style.backgroundImage;
 		squareIdBeingDragged = parseInt(this.id);
 		console.log(colourBeingDragged);
 		console.log(this.id, "dragstart");
@@ -68,14 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function dragDrop() {
 		console.log(this.id, "dragdrop");
-		colourBeingReplaced = this.style.backgroundColor;
+		colourBeingReplaced = this.style.backgroundImage;
 
 		// Obtaining the ID of the chosen square
 		squareIdBeingReplaced = parseInt(this.id);
 
 		// Changing the colour of the chosen and replaced square using ID's
-		squares[squareIdBeingDragged].style.backgroundColor = colourBeingReplaced;
-		squares[squareIdBeingReplaced].style.backgroundColor = colourBeingDragged;
+		squares[squareIdBeingDragged].style.backgroundImage = colourBeingReplaced;
+		squares[squareIdBeingReplaced].style.backgroundImage = colourBeingDragged;
 	}
 
 	function dragEnd() {
@@ -96,10 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		} else if (squareIdBeingReplaced && !validMove) {
 			squares[
 				squareIdBeingReplaced
-			].style.backgroundColor = colourBeingReplaced;
-			squares[squareIdBeingDragged].style.backgroundColor = colourBeingDragged;
+			].style.backgroundImage = colourBeingReplaced;
+			squares[squareIdBeingDragged].style.backgroundImage = colourBeingDragged;
 		} else {
-			squares[squareIdBeingDragged].style.backgroundColor = colourBeingDragged;
+			squares[squareIdBeingDragged].style.backgroundImage = colourBeingDragged;
 		}
 	}
 
@@ -107,18 +114,18 @@ document.addEventListener("DOMContentLoaded", () => {
 	function moveDown() {
 		// check the first seven rows for an empty square
 		for (i = 0; i < 55; i++) {
-			if (squares[i + width].style.backgroundColor === "") {
-				squares[i + width].style.backgroundColor =
-					squares[i].style.backgroundColor;
-				
-				squares[i].style.backgroundColor = '';
+			if (squares[i + width].style.backgroundImage === "") {
+				squares[i + width].style.backgroundImage =
+					squares[i].style.backgroundImage;
+
+				squares[i].style.backgroundImage = "";
 
 				// To include new squares in the first row
-				const firstRow = [0, 1, 2,3, 4,5 ,6, 7];
+				const firstRow = [0, 1, 2, 3, 4, 5, 6, 7];
 				const isInFirstRow = firstRow.includes(i);
-				if(isInFirstRow && squares[i].style.backgroundColor === '') {
+				if (isInFirstRow && squares[i].style.backgroundImage === "") {
 					let randomColour = Math.floor(Math.random() * candyColours.length);
-					squares[i].style.backgroundColor = candyColours[randomColour];
+					squares[i].style.backgroundImage = candyColours[randomColour];
 				}
 			}
 		}
@@ -132,10 +139,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		for (let i = 0; i < 61; i++) {
 			//Variable for a correct set of 4 squares
 			let rowOfFour = [i, i + 1, i + 2, i + 3];
-			let decidedColour = squares[i].style.backgroundColor;
+			let decidedColour = squares[i].style.backgroundImage;
 
 			// To check if the square is blank
-			const isBlank = squares[i].style.backgroundColor === "";
+			const isBlank = squares[i].style.backgroundImage === "";
 
 			// To cater for the wrapping of matches from one row to another
 			// Set the square for which match checking is to be skipped-
@@ -168,13 +175,13 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (
 				rowOfFour.every(
 					(index) =>
-						squares[index].style.backgroundColor === decidedColour && !isBlank
+						squares[index].style.backgroundImage === decidedColour && !isBlank
 				)
 			) {
 				score += 4;
 				scoreDisplay.innerHTML = score;
 				rowOfFour.forEach((index) => {
-					squares[index].style.backgroundColor = "";
+					squares[index].style.backgroundImage = "";
 				});
 			}
 		}
@@ -188,22 +195,22 @@ document.addEventListener("DOMContentLoaded", () => {
 		for (let i = 0; i < 47; i++) {
 			//Variable for a correct set of 4 squares
 			let columnOfFour = [i, i + width, i + width * 2, i + width * 3];
-			let decidedColour = squares[i].style.backgroundColor;
+			let decidedColour = squares[i].style.backgroundImage;
 
 			// To check if the square is blank
-			const isBlank = squares[i].style.backgroundColor === "";
+			const isBlank = squares[i].style.backgroundImage === "";
 
 			// Logic for correct set of 4
 			if (
 				columnOfFour.every(
 					(index) =>
-						squares[index].style.backgroundColor === decidedColour && !isBlank
+						squares[index].style.backgroundImage === decidedColour && !isBlank
 				)
 			) {
 				score += 4;
 				scoreDisplay.innerHTML = score;
 				columnOfFour.forEach((index) => {
-					squares[index].style.backgroundColor = "";
+					squares[index].style.backgroundImage = "";
 				});
 			}
 		}
@@ -217,10 +224,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		for (let i = 0; i < 61; i++) {
 			// Variable for a correct set of 3 squares
 			let rowOfThree = [i, i + 1, i + 2];
-			let decidedColour = squares[i].style.backgroundColor;
+			let decidedColour = squares[i].style.backgroundImage;
 
 			// To check for blank squares
-			const isBlank = squares[i].style.backgroundColor === "";
+			const isBlank = squares[i].style.backgroundImage === "";
 
 			// To cater for the wrapping of matches from one row to another
 			// Set the square for which match checking is to be skipped-
@@ -231,13 +238,13 @@ document.addEventListener("DOMContentLoaded", () => {
 			if (
 				rowOfThree.every(
 					(index) =>
-						squares[index].style.backgroundColor === decidedColour && !isBlank
+						squares[index].style.backgroundImage === decidedColour && !isBlank
 				)
 			) {
 				score += 3;
 				scoreDisplay.innerHTML = score;
 				rowOfThree.forEach((index) => {
-					squares[index].style.backgroundColor = "";
+					squares[index].style.backgroundImage = "";
 				});
 			}
 		}
@@ -251,22 +258,22 @@ document.addEventListener("DOMContentLoaded", () => {
 		for (let i = 0; i < 47; i++) {
 			// Variable for a correct set of 3 squares
 			let columnOfThree = [i, i + width, i + width * 2];
-			let decidedColour = squares[i].style.backgroundColor;
+			let decidedColour = squares[i].style.backgroundImage;
 
 			// To check for blank squares
-			const isBlank = squares[i].style.backgroundColor === "";
+			const isBlank = squares[i].style.backgroundImage === "";
 
 			// Logic for correct set
 			if (
 				columnOfThree.every(
 					(index) =>
-						squares[index].style.backgroundColor === decidedColour && !isBlank
+						squares[index].style.backgroundImage === decidedColour && !isBlank
 				)
 			) {
 				score += 3;
 				scoreDisplay.innerHTML = score;
 				columnOfThree.forEach((index) => {
-					squares[index].style.backgroundColor = "";
+					squares[index].style.backgroundImage = "";
 				});
 			}
 		}
